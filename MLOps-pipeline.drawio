@@ -1,0 +1,119 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="apCS0zytLHW41bhuu0D0">
+    <mxGraphModel dx="1438" dy="837" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="4EDXW9HYBDvibsEUNtvx-17" edge="1" parent="1" source="4EDXW9HYBDvibsEUNtvx-1" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="4EDXW9HYBDvibsEUNtvx-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4EDXW9HYBDvibsEUNtvx-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="1. Fuente centralizada&lt;div&gt;Consultas médicas diarias&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="250" x="220" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="4EDXW9HYBDvibsEUNtvx-18" edge="1" parent="1" source="4EDXW9HYBDvibsEUNtvx-2" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" target="4EDXW9HYBDvibsEUNtvx-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4EDXW9HYBDvibsEUNtvx-19" edge="1" parent="1" source="4EDXW9HYBDvibsEUNtvx-2" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" target="4EDXW9HYBDvibsEUNtvx-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4EDXW9HYBDvibsEUNtvx-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="2. Limpieza y transformación&lt;div&gt;Aumentación para enfermedades huerfanas&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="250" x="520" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="4EDXW9HYBDvibsEUNtvx-3" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Feature Store" vertex="1">
+          <mxGeometry height="90" width="150" x="420" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="4EDXW9HYBDvibsEUNtvx-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="3. Experimentos DS&lt;div&gt;Modelos ML / redes neuronales / git branch&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="250" x="820" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="4EDXW9HYBDvibsEUNtvx-23" edge="1" parent="1" source="4EDXW9HYBDvibsEUNtvx-5" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" target="4EDXW9HYBDvibsEUNtvx-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4EDXW9HYBDvibsEUNtvx-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="4. Tests unitarios&lt;div&gt;Componentes aislados del pipeline&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="250" x="220" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="4EDXW9HYBDvibsEUNtvx-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="5. Atomatización de ingeniería de datos" vertex="1">
+          <mxGeometry height="60" width="250" x="520" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="4EDXW9HYBDvibsEUNtvx-7" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Feature Store Producción" vertex="1">
+          <mxGeometry height="90" width="150" x="690" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="4EDXW9HYBDvibsEUNtvx-8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="6. Generación de artefactos del entrenamiento del modelo" vertex="1">
+          <mxGeometry height="60" width="250" x="820" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="4EDXW9HYBDvibsEUNtvx-28" edge="1" parent="1" source="4EDXW9HYBDvibsEUNtvx-9" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" target="4EDXW9HYBDvibsEUNtvx-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4EDXW9HYBDvibsEUNtvx-9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="7. Tests del modelo: Exhaustivos en enfermedades huerfanas." vertex="1">
+          <mxGeometry height="60" width="250" x="220" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="4EDXW9HYBDvibsEUNtvx-29" edge="1" parent="1" source="4EDXW9HYBDvibsEUNtvx-10" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="4EDXW9HYBDvibsEUNtvx-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4EDXW9HYBDvibsEUNtvx-10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="8. Tests de integración&lt;span style=&quot;color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px; text-align: start; white-space: nowrap;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20parent%3D%221%22%20style%3D%22rounded%3D1%3BwhiteSpace%3Dwrap%3Bhtml%3D1%3B%22%20value%3D%227.%20Tests%20del%20modelo%3A%20Exhaustivos%20en%20enfermedades%20huerfanas.%22%20vertex%3D%221%22%3E%3CmxGeometry%20height%3D%2260%22%20width%3D%22250%22%20x%3D%22400%22%20y%3D%221120%22%20as%3D%22geometry%22%2F%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxGraphModel%3E&lt;/span&gt;" vertex="1">
+          <mxGeometry height="60" width="250" x="520" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="4EDXW9HYBDvibsEUNtvx-11" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" value="9. Despliegue tipo canary: Docker + REST API, posibilidad de rollback" vertex="1">
+          <mxGeometry height="60" width="250" x="820" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="4EDXW9HYBDvibsEUNtvx-31" edge="1" parent="1" source="4EDXW9HYBDvibsEUNtvx-12" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="4EDXW9HYBDvibsEUNtvx-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4EDXW9HYBDvibsEUNtvx-12" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" value="10. Monitoreo de métricas: Recall" vertex="1">
+          <mxGeometry height="60" width="250" x="220" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="4EDXW9HYBDvibsEUNtvx-14" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="Trigger reentrenamiento" vertex="1">
+          <mxGeometry height="60" width="250" x="530" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="4EDXW9HYBDvibsEUNtvx-16" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Metadata del modelo" vertex="1">
+          <mxGeometry height="80" width="150" x="930" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="4EDXW9HYBDvibsEUNtvx-20" edge="1" parent="1" source="4EDXW9HYBDvibsEUNtvx-4" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=12;startSize=8;endSize=8;" target="4EDXW9HYBDvibsEUNtvx-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4EDXW9HYBDvibsEUNtvx-21" edge="1" parent="1" source="4EDXW9HYBDvibsEUNtvx-2" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="4EDXW9HYBDvibsEUNtvx-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="740" y="260" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4EDXW9HYBDvibsEUNtvx-22" edge="1" parent="1" source="4EDXW9HYBDvibsEUNtvx-4" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.639;entryY=0.022;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=12;startSize=8;endSize=8;" target="4EDXW9HYBDvibsEUNtvx-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="790" y="270" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4EDXW9HYBDvibsEUNtvx-24" edge="1" parent="1" source="4EDXW9HYBDvibsEUNtvx-6" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.243;entryY=0.033;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=12;startSize=8;endSize=8;" target="4EDXW9HYBDvibsEUNtvx-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4EDXW9HYBDvibsEUNtvx-25" edge="1" parent="1" source="4EDXW9HYBDvibsEUNtvx-7" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.309;entryY=1.036;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=12;startSize=8;endSize=8;" target="4EDXW9HYBDvibsEUNtvx-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4EDXW9HYBDvibsEUNtvx-26" edge="1" parent="1" source="4EDXW9HYBDvibsEUNtvx-8" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.321;entryY=0.038;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=12;startSize=8;endSize=8;" target="4EDXW9HYBDvibsEUNtvx-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4EDXW9HYBDvibsEUNtvx-27" edge="1" parent="1" source="4EDXW9HYBDvibsEUNtvx-16" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.82;entryY=0.067;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=12;startSize=8;endSize=8;" target="4EDXW9HYBDvibsEUNtvx-9">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="760" y="500" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4EDXW9HYBDvibsEUNtvx-30" edge="1" parent="1" source="4EDXW9HYBDvibsEUNtvx-11" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.88;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=12;startSize=8;endSize=8;" target="4EDXW9HYBDvibsEUNtvx-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4EDXW9HYBDvibsEUNtvx-32" edge="1" parent="1" source="4EDXW9HYBDvibsEUNtvx-14" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0;entryDx=0;entryDy=60;entryPerimeter=0;fontSize=12;startSize=8;endSize=8;" target="4EDXW9HYBDvibsEUNtvx-7">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="660" y="710" />
+              <mxPoint x="140" y="790" />
+              <mxPoint x="100" y="500" />
+              <mxPoint x="300" y="410" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
