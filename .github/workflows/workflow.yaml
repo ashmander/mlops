@@ -20,7 +20,9 @@ jobs:
 
   unit_tests:
     if: github.event_name == 'pull_request'
+    needs: comment_start
     uses: ./.github/workflows/run-tests.yml  # reutiliza el workflow de tests
+    
   comment_end:
     if: github.event_name == 'pull_request'
     needs: unit_tests
