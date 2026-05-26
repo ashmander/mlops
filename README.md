@@ -91,3 +91,4 @@ El pipeline corre automáticamente en GitHub Actions:
 - **Merge → main** — corre tests y publica imagen Docker en GitHub Packages (`ghcr.io`)
 
 La documentación interactiva está disponible en `http://localhost:8000/docs`.
+El front esta disponible en `http://localhost:8000`.
