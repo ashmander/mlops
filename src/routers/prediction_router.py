@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Body
 from src.schemas.prediction_data_request import SymptomsSchema
 from src.services.prediction_engine import predict
+from src.services.prediction_history import get_prediction_statistics, save_prediction
 
 router = APIRouter(
     prefix="/healthy-checker",
@@ -119,4 +120,11 @@ def predict_disease(
         }
     )
 ):
-    return predict(input_data)
+    result = predict(input_data)
+    save_prediction(result["prediction"])
+    return result
+
+
+@router.get("/statistics")
+def prediction_statistics():
+    return get_prediction_statistics()
