@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Predicciones Medicas</title>
+    <link rel="stylesheet" href="/static/styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="panel prediction-panel">
+        <div class="section-header">
+          <div>
+            <p class="eyebrow">MLOps API</p>
+            <h1>Prediccion medica</h1>
+          </div>
+          <button id="reset-button" class="ghost-button" type="button">Limpiar</button>
+        </div>
+
+        <form id="prediction-form">
+          <div id="symptom-grid" class="symptom-grid"></div>
+        </form>
+
+        <div class="actions">
+          <button id="healthy-example" class="secondary-button" type="button">Paciente sano</button>
+          <button id="terminal-example" class="secondary-button" type="button">Ejemplo terminal</button>
+          <button form="prediction-form" class="primary-button" type="submit">Predecir</button>
+        </div>
+
+        <div id="prediction-result" class="result-box">Sin prediccion todavia</div>
+      </section>
+
+      <section class="panel stats-panel">
+        <div class="section-header">
+          <div>
+            <p class="eyebrow">Reporte</p>
+            <h2>Estadisticas</h2>
+          </div>
+          <button id="refresh-stats" class="ghost-button" type="button">Actualizar</button>
+        </div>
+
+        <dl id="category-counts" class="counts-grid"></dl>
+
+        <div class="last-date">
+          <span>Ultima prediccion</span>
+          <strong id="last-prediction-at">Sin datos</strong>
+        </div>
+
+        <h3>Ultimas 5 predicciones</h3>
+        <ol id="last-predictions" class="history-list"></ol>
+      </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
