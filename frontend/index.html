@@ -7,12 +7,24 @@
     <link rel="stylesheet" href="/static/styles.css">
   </head>
   <body>
+    <header class="brand-bar">
+      <div class="brand-mark" aria-hidden="true">
+        <span></span>
+      </div>
+      <div>
+        <p>Universidad ICESI</p>
+        <strong>Sistema de prediccion medica</strong>
+      </div>
+      <a href="/docs">API Docs</a>
+    </header>
+
     <main class="app-shell">
       <section class="panel prediction-panel">
         <div class="section-header">
           <div>
-            <p class="eyebrow">MLOps API</p>
+            <p class="eyebrow">Modulo MLOps</p>
             <h1>Prediccion medica</h1>
+            <p class="section-copy">Registro de sintomas y consulta del diagnostico simulado del modelo.</p>
           </div>
           <button id="reset-button" class="ghost-button" type="button">Limpiar</button>
         </div>
@@ -35,6 +47,7 @@
           <div>
             <p class="eyebrow">Reporte</p>
             <h2>Estadisticas</h2>
+            <p class="section-copy">Resumen operativo de las predicciones realizadas.</p>
           </div>
           <button id="refresh-stats" class="ghost-button" type="button">Actualizar</button>
         </div>
