@@ -1,0 +1,60 @@
+name: CI/CD Pipeline
+
+on:
+  pull_request:
+    branches: [main]        
+  push:
+    branches: [main]        
+
+permissions:
+  pull-requests: write
+
+jobs:
+
+  # ─── EVENTO 1: Solo en PR ───────────────────────────────
+  comment_start:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Comment inicio
+        uses: thollander/actions-comment-pull-request@v3
+        with:
+          message: "CI/CD en acción. Ejecutando tareas …"
+
+  unit_tests:
+    if: github.event_name == 'pull_request'
+    needs: comment_start
+    uses: ./.github/workflows/test.yaml  # reutiliza el workflow de tests
+    
+  comment_end:
+    if: github.event_name == 'pull_request'
+    needs: unit_tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Comment éxito
+        uses: thollander/actions-comment-pull-request@v3
+        with:
+          message: "CI/CD terminado con éxito."
+
+  # ─── EVENTO 2: Solo en push/merge a main ────────────────
+  unit_tests_main:
+    if: github.event_name == 'push'
+    uses: ./.github/workflows/test.yaml  # reutiliza el workflow de tests
+
+  build_and_push:
+    if: github.event_name == 'push'
+    needs: unit_tests_main
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Login a GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build y push imagen
+        uses: docker/build-push-action@v5
+        with:
+          push: true
+          tags: ghcr.io/${{ github.repository }}:latest

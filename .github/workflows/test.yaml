@@ -1,0 +1,14 @@
+# .github/workflows/test.yaml  ← workflow reutilizable
+name: Run Tests
+
+on:
+  workflow_call:  # permite ser llamado por otros workflows
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync --frozen --dev
+      - run: uv run pytest tests/
