@@ -54,7 +54,7 @@ def predict_disease(
                 }
             },
             "acute_disease": {
-                "summary": "🔴 Acute disease",
+                "summary": "🔵 Acute disease",
                 "description": "Patient with severe fever and shortness of breath",
                 "value": {
                     "fever":               {"present": True,  "severity": "severe", "duration_days": 2},
@@ -96,7 +96,7 @@ def predict_disease(
                 }
             },
             "terminal_disease": {
-                "summary": "Terminal disease",
+                "summary": "🔴 Terminal disease",
                 "description": "Patient with severe long-lasting systemic symptoms",
                 "value": {
                     "fever":               {"present": False, "severity": None,     "duration_days": None},
