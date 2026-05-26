@@ -21,7 +21,7 @@ jobs:
   unit_tests:
     if: github.event_name == 'pull_request'
     needs: comment_start
-    uses: ./.github/workflows/run-tests.yml  # reutiliza el workflow de tests
+    uses: ./.github/workflows/tests.yml  # reutiliza el workflow de tests
     
   comment_end:
     if: github.event_name == 'pull_request'
@@ -36,7 +36,7 @@ jobs:
   # ─── EVENTO 2: Solo en push/merge a main ────────────────
   unit_tests_main:
     if: github.event_name == 'push'
-    uses: ./.github/workflows/run-tests.yml  # reutiliza el workflow de tests
+    uses: ./.github/workflows/tests.yml  # reutiliza el workflow de tests
 
   build_and_push:
     if: github.event_name == 'push'
