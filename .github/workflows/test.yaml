@@ -1,4 +1,4 @@
-# .github/workflows/run-tests.yml  ← workflow reutilizable
+# .github/workflows/test.yaml  ← workflow reutilizable
 name: Run Tests
 
 on:
