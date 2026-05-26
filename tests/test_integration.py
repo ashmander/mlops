@@ -45,6 +45,13 @@ def make_payload(**overrides):
     return payload
 
 
+def test_frontend_home_is_served():
+    response = client.get("/")
+
+    assert response.status_code == 200
+    assert "Prediccion medica" in response.text
+
+
 # ── Test 1: Respuesta HTTP correcta con paciente sano ─────────────────────────
 
 def test_endpoint_returns_200_healthy():
