@@ -95,3 +95,18 @@ def test_chronic_disease_weight_loss_and_fatigue():
     result = predict(data)
 
     assert result["prediction"] == DiagnosticResponse.CHRONIC_DISEASE
+
+
+def test_terminal_disease_severe_systemic_symptoms():
+    """
+    Perdida de peso severa prolongada + fatiga severa + sudoracion nocturna
+    prolongada -> ENFERMEDAD TERMINAL.
+    """
+    data = make_symptoms(
+        weight_loss=Symptom(present=True, severity=Severity.severe, duration_days=75),
+        fatigue=Symptom(present=True, severity=Severity.severe, duration_days=75),
+        night_sweats=Symptom(present=True, severity=Severity.severe, duration_days=45),
+    )
+    result = predict(data)
+
+    assert result["prediction"] == DiagnosticResponse.TERMINAL_DISEASE

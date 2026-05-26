@@ -7,6 +7,18 @@ def predict(input_data: SymptomsSchema):
     load a trained model and make predictions based on the input data.
     """
 
+    # Terminal - severe long-lasting systemic symptoms
+    if (input_data.weight_loss.present
+            and input_data.weight_loss.severity == Severity.severe
+            and input_data.weight_loss.duration_days is not None
+            and input_data.weight_loss.duration_days > 60
+            and input_data.fatigue.present
+            and input_data.fatigue.severity == Severity.severe
+            and input_data.night_sweats.present
+            and input_data.night_sweats.duration_days is not None
+            and input_data.night_sweats.duration_days > 30):
+        return {"prediction": DiagnosticResponse.TERMINAL_DISEASE}
+
     # Acute — severity symptoms that require immediate attention
     if (input_data.fever.present and input_data.fever.severity == Severity.severe
             and input_data.shortness_of_breath.present):

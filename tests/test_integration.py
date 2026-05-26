@@ -91,6 +91,22 @@ def test_endpoint_chronic_disease():
 
 # ── Test 4: Payload inválido retorna 422 ──────────────────────────────────────
 
+def test_endpoint_terminal_disease():
+    """
+    Sintomas sistemicos severos y prolongados enviados al endpoint
+    deben retornar 'ENFERMEDAD TERMINAL' con status 200.
+    """
+    payload = make_payload(
+        weight_loss=symptom(present=True, severity="severe", duration_days=75),
+        fatigue=symptom(present=True, severity="severe", duration_days=75),
+        night_sweats=symptom(present=True, severity="severe", duration_days=45),
+    )
+    response = client.post("/healthy-checker/predict", json=payload)
+
+    assert response.status_code == 200
+    assert response.json()["prediction"] == "ENFERMEDAD TERMINAL"
+
+
 def test_endpoint_invalid_severity_returns_422():
     """
     Un valor de severity inválido debe ser rechazado por Pydantic
