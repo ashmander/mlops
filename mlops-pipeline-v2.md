@@ -34,9 +34,9 @@ El sistema tiene dos puntos de entrada bien diferenciados que coexisten:
 ### 1.1 API REST — Predicción en tiempo real
 
 - **Quién lo usa:** el médico, desde el frontend (navegador o app local).
-- **Cómo funciona:** el médico ingresa los síntomas del paciente mediante un formulario; el frontend hace una petición HTTP POST al endpoint `/predict` del modelo. El modelo retorna en milisegundos la predicción de enfermedad con su probabilidad por clase.
+- **Cómo funciona:** el médico ingresa los síntomas del paciente mediante un formulario; el frontend hace una petición HTTP POST al endpoint `/healthy-checker/predict` del modelo. El prototipo actual retorna la categoría predicha; en una implementación real del modelo, la respuesta debe incluir además la probabilidad por clase para apoyar la interpretación clínica.
 - **Rol de la predicción:** sirve como punto de contraste frente al diagnóstico previo del médico, **no como reemplazo**. El médico mantiene la autoridad clínica.
-- **Tecnología frontend:** React (SPA ligera) + Axios para llamadas HTTP.
+- **Tecnología frontend:** HTML/CSS/JavaScript estático + Fetch API para el prototipo actual. Para una versión productiva con más pantallas, autenticación y estado clínico complejo, se recomienda migrar a React (SPA ligera) + Axios o Fetch.
 - **Tecnología backend de inferencia:** FastAPI (Python), empaquetado en Docker.
 
 > **Suposición:** los síntomas se capturan con tres tipos de campo: severidad (categórico ordinal: leve/moderada/severa), duración en días (numérico entero) y presencia del síntoma (booleano). El esquema es fijo y validado en el frontend antes de enviar.
@@ -194,7 +194,7 @@ Pruebas sobre los componentes aislados del pipeline: funciones de preprocesamien
 - `test_encoding_severity`: verifica que `OrdinalEncoder` asigna los valores correctos (leve=0, moderada=1, severa=2).
 - `test_smote_output_shape`: verifica que SMOTE genera el número correcto de muestras sintéticas por clase.
 - `test_feast_read_schema`: verifica que las features leídas del Feature Store tienen el schema esperado.
-- `test_model_output_format`: verifica que la salida del modelo es un array de probabilidades con forma `(n_samples, n_classes)`.
+- `test_model_output_format`: en el prototipo actual verifica que la salida contiene la categoría `prediction`; en el modelo real verifica además un array de probabilidades con forma `(n_samples, n_classes)`.
 - `test_anonymization`: verifica que ningún campo con PII sobrevive al proceso de anonimización.
 
 ### Suposiciones
@@ -268,7 +268,7 @@ Casos preparados para validar el comportamiento del modelo recién entrenado ant
 | Tecnología | Rol | Justificación |
 |---|---|---|
 | **pytest** | Framework de tests | Consistente con la Etapa 4. |
-| **Great Expectations** | Validación de predicciones | Verifica que las probabilidades de salida estén en [0,1], sumen 1, y que el recall en el conjunto de test fijo supere los umbrales definidos. |
+| **Great Expectations** | Validación de predicciones | En el modelo real verifica que las probabilidades de salida estén en [0,1], sumen 1, y que el recall en el conjunto de test fijo supere los umbrales definidos. En el prototipo actual valida el formato de la categoría retornada. |
 | **GitHub Actions** | Ejecución automática en CI | Se ejecuta después de la Etapa 6; si falla, el artefacto no pasa a la Etapa 8. |
 
 ### Tests clave
@@ -276,7 +276,7 @@ Casos preparados para validar el comportamiento del modelo recién entrenado ant
 - **Recall mínimo por clase:** para cada clase de enfermedad, recall ≥ 0.75 (comunes) y ≥ 0.85 (huérfanas). Si no se cumple, el pipeline se detiene y se alerta al equipo.
 - **Robustez ante síntomas faltantes:** se prueba el modelo con registros donde algunos campos de síntomas son `NaN`. El modelo debe retornar una predicción válida (no error) gracias a la imputation en el preprocesador.
 - **Robustez ante valores ruidosos:** se prueba con `duration_days` con valores extremos (0, 365) y severidades en el límite.
-- **Coherencia de probabilidades:** la suma de probabilidades por registro debe ser 1.0 ± 1e-6.
+- **Coherencia de probabilidades:** en el modelo real, la suma de probabilidades por registro debe ser 1.0 ± 1e-6. En el prototipo actual, que simula reglas y no probabilidades, se valida que la categoría pertenezca al conjunto permitido.
 - **Test de regresión:** se compara el recall en el conjunto de test fijo contra el modelo actualmente en producción. El nuevo modelo debe tener recall ≥ al anterior en la mayoría de clases.
 
 ### Suposiciones
@@ -296,7 +296,7 @@ Validación del flujo completo por los dos puntos de entrada: ingesta del batch 
 
 | Tecnología | Rol | Justificación |
 |---|---|---|
-| **pytest + httpx** | Tests de la API REST | `httpx` permite hacer peticiones HTTP síncronas y asíncronas al endpoint `/predict` en un entorno de test (usando el cliente de test de FastAPI). |
+| **pytest + httpx** | Tests de la API REST | `httpx` permite hacer peticiones HTTP síncronas y asíncronas al endpoint `/healthy-checker/predict` en un entorno de test (usando el cliente de test de FastAPI). |
 | **Postman / Newman** | Tests de API end-to-end (opcional) | Colección de Postman exportable que puede correrse en CI con Newman. Útil para documentar los contratos de la API. |
 | **pytest** + Docker Compose | Tests del flujo batch | Se levanta un entorno Docker Compose con base de datos de test y se simula el DAG de Airflow con datos de prueba. |
 | **locust** | Pruebas de carga | Simula múltiples médicos haciendo predicciones simultáneas para verificar que el tiempo de respuesta ≤ 500ms bajo carga de 50 usuarios concurrentes. |
@@ -306,7 +306,7 @@ Validación del flujo completo por los dos puntos de entrada: ingesta del batch 
 
 - **Batch con formato inválido:** enviar registros con `severity = "extreme"` (valor no válido). El sistema debe rechazarlos con error descriptivo y no almacenarlos.
 - **Batch con registros sin validar:** enviar registros con `diagnosis_confirmed = False`. Deben ser filtrados y no procesados.
-- **API REST — caso normal:** POST con síntomas válidos → respuesta 200 con probabilidades por clase.
+- **API REST — caso normal:** POST con síntomas válidos → respuesta 200 con categoría predicha en el prototipo actual; en el modelo real se agrega el vector de probabilidades por clase.
 - **API REST — campos faltantes:** POST sin `duration_days` → el sistema imputa y responde sin error 500.
 - **API REST — tiempo de respuesta:** bajo 50 usuarios concurrentes (locust), el percentil 95 de latencia debe ser ≤ 500ms.
 - **Coherencia del pipeline completo:** un registro ingresado por batch aparece correctamente en el Feature Store después del pipeline de Etapa 5.
@@ -344,7 +344,7 @@ El modelo aprobado en las etapas de test se despliega mediante una estrategia ca
 ### Suposiciones
 
 - **El rollback es automático:** no requiere intervención humana. El sistema detecta la degradación comparando el recall del canary contra el modelo actual en producción.
-- **El médico no nota el canary:** desde el frontend, ambos modelos exponen el mismo endpoint `/predict`. El enrutamiento es transparente.
+- **El médico no nota el canary:** desde el frontend, ambos modelos exponen el mismo endpoint `/healthy-checker/predict`. El enrutamiento es transparente.
 - **Período de observación:** 24 horas es suficiente para acumular suficientes predicciones validadas en el contexto de una clínica (estimado: 20-50 consultas/día).
 
 ---
@@ -448,7 +448,7 @@ Al detectar degradación del recall en producción, el Trigger reinicia el pipel
 | CI/CD | GitHub Actions | QA + Producción |
 | Monitoreo | Prometheus + Grafana | Producción |
 | Alertas | Slack Webhook / PagerDuty | Producción |
-| Frontend médico | React + Axios | UX |
+| Frontend médico | HTML/CSS/JavaScript + Fetch API (prototipo); React + Axios/Fetch (versión productiva) | UX |
 | Control de versiones | Git + GitHub | Todo |
 
 ---

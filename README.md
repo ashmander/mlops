@@ -2,6 +2,15 @@
 
 API REST para predecir diagnósticos médicos basados en síntomas del paciente, con historial de predicciones y frontend web integrado.
 
+## Arquitectura MLOps v2
+
+La propuesta end-to-end actualizada se encuentra en:
+
+- [`mlops-pipeline-v2.md`](mlops-pipeline-v2.md): explicación detallada de etapas, supuestos, tecnologías, decisiones y CHANGELOG v1 → v2.
+- [`mlops-pipeline-v2.drawio`](mlops-pipeline-v2.drawio): diagrama editable del pipeline propuesto.
+
+La propuesta original de la semana 1 se conserva en [`pipeline_mlops_diagrama.md`](pipeline_mlops_diagrama.md) para facilitar la comparación.
+
 ## Diagnósticos posibles
 
 | | Diagnóstico |
