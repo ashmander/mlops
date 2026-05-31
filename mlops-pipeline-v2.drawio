@@ -1,0 +1,419 @@
+<mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1900" pageHeight="1400" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- ============================================================ -->
+    <!-- TITLE -->
+    <!-- ============================================================ -->
+    <mxCell id="title" value="MLOps Pipeline v2 — Diagnóstico de Enfermedades Huérfanas" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#1a237e;" vertex="1" parent="1">
+      <mxGeometry x="350" y="20" width="1200" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- LEGEND -->
+    <!-- ============================================================ -->
+    <mxCell id="leg_bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="1640" y="70" width="220" height="220" as="geometry" />
+    </mxCell>
+    <mxCell id="leg_title" value="Leyenda" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="1640" y="75" width="220" height="25" as="geometry" />
+    </mxCell>
+    <mxCell id="leg1" value="Etapa del pipeline" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+      <mxGeometry x="1655" y="108" width="190" height="28" as="geometry" />
+    </mxCell>
+    <mxCell id="leg2" value="Almacenamiento / Artefacto" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=5;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+      <mxGeometry x="1655" y="148" width="190" height="35" as="geometry" />
+    </mxCell>
+    <mxCell id="leg3" value="Decisión / Control" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+      <mxGeometry x="1695" y="193" width="110" height="50" as="geometry" />
+    </mxCell>
+    <mxCell id="leg4" value="Ciclo iterativo" style="text;html=1;strokeColor=none;fillColor=none;align=left;" vertex="1" parent="1">
+      <mxGeometry x="1655" y="252" width="190" height="25" as="geometry" />
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- SECTION: ENTRADA DE DATOS (izquierda superior) -->
+    <!-- ============================================================ -->
+    <mxCell id="sec_input" value="ENTRADA DE DATOS" style="text;html=1;strokeColor=none;fillColor=#e8eaf6;align=center;fontStyle=1;fontSize=11;fontColor=#283593;rounded=1;" vertex="1" parent="1">
+      <mxGeometry x="40" y="70" width="280" height="30" as="geometry" />
+    </mxCell>
+
+    <!-- Frontend médico -->
+    <mxCell id="frontend" value="&lt;b&gt;Frontend Médico&lt;/b&gt;&lt;br&gt;React + FastAPI client&lt;br&gt;&lt;i&gt;Ingreso de síntomas del paciente&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e3f2fd;strokeColor=#1565c0;fontSize=10;" vertex="1" parent="1">
+      <mxGeometry x="40" y="115" width="200" height="65" as="geometry" />
+    </mxCell>
+
+    <!-- Batch diario -->
+    <mxCell id="batch_input" value="&lt;b&gt;Consultas Validadas (Batch)&lt;/b&gt;&lt;br&gt;Apache Airflow DAG&lt;br&gt;&lt;i&gt;Solo registros con diagnóstico médico confirmado&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e3f2fd;strokeColor=#1565c0;fontSize=10;" vertex="1" parent="1">
+      <mxGeometry x="40" y="210" width="200" height="70" as="geometry" />
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- ETAPA 1: Centralización -->
+    <!-- ============================================================ -->
+    <mxCell id="etapa1" value="&lt;b&gt;Etapa 1 — Centralización de Datos&lt;/b&gt;&lt;br&gt;PostgreSQL (AWS RDS / local Docker)&lt;br&gt;Anonimización: Python Faker + hashing SHA-256&lt;br&gt;&lt;i&gt;Batch diario vía Airflow. Solo registros validados.&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+      <mxGeometry x="300" y="185" width="260" height="80" as="geometry" />
+    </mxCell>
+
+    <!-- Raw DB -->
+    <mxCell id="raw_db" value="Raw Data DB&lt;br&gt;PostgreSQL / S3" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=8;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="1">
+      <mxGeometry x="340" y="300" width="180" height="55" as="geometry" />
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- ETAPA 2: Limpieza y Transformación -->
+    <!-- ============================================================ -->
+    <mxCell id="etapa2" value="&lt;b&gt;Etapa 2 — Limpieza, Transformación y Aumentación ↻&lt;/b&gt;&lt;br&gt;Pandas / Great Expectations (validación)&lt;br&gt;SMOTE (imbalanced-learn) + GANs opcionales&lt;br&gt;&lt;i&gt;Iterativa: si datos insuficientes → re-evaluar estrategia&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+      <mxGeometry x="620" y="185" width="270" height="85" as="geometry" />
+    </mxCell>
+
+    <!-- Decision: datos suficientes? -->
+    <mxCell id="dec_data" value="¿Datos suficientes para huérfanas?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;" vertex="1" parent="1">
+      <mxGeometry x="650" y="305" width="200" height="65" as="geometry" />
+    </mxCell>
+
+    <!-- Feature Store (experimental) -->
+    <mxCell id="feature_store_exp" value="Feature Store (Experimentos)&lt;br&gt;Feast / DVC" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=8;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="1">
+      <mxGeometry x="660" y="400" width="180" height="55" as="geometry" />
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- ETAPA 3: Experimentos DS -->
+    <!-- ============================================================ -->
+    <mxCell id="etapa3" value="&lt;b&gt;Etapa 3 — Experimentos DS ↻&lt;/b&gt;&lt;br&gt;MLflow (tracking) + Git branches por experimento&lt;br&gt;Modelos: RF, SVM, XGBoost, PyTorch (redes neuronales)&lt;br&gt;&lt;i&gt;Criterio: recall por clase (énfasis huérfanas). Jupyter / VS Code.&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+      <mxGeometry x="960" y="185" width="280" height="90" as="geometry" />
+    </mxCell>
+
+    <!-- Decision: métricas satisfactorias? -->
+    <mxCell id="dec_metrics" value="¿Recall por clase satisfactorio?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;" vertex="1" parent="1">
+      <mxGeometry x="990" y="310" width="200" height="65" as="geometry" />
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- ETAPA 4: Tests Unitarios -->
+    <!-- ============================================================ -->
+    <mxCell id="etapa4" value="&lt;b&gt;Etapa 4 — Tests Unitarios&lt;/b&gt;&lt;br&gt;pytest + GitHub Actions CI&lt;br&gt;&lt;i&gt;Preprocesamiento, aumentación, lectura Feature Store, formato salida modelo&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+      <mxGeometry x="620" y="520" width="260" height="75" as="geometry" />
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- SEPARADOR: línea horizontal de producción -->
+    <!-- ============================================================ -->
+    <mxCell id="prod_label" value="— — — — — — — — — — — — — — PRODUCCIÓN — — — — — — — — — — — — — —" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontStyle=1;fontSize=11;fontColor=#b71c1c;" vertex="1" parent="1">
+      <mxGeometry x="40" y="635" width="1560" height="25" as="geometry" />
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- TRIGGER (disparador) -->
+    <!-- ============================================================ -->
+    <mxCell id="trigger" value="&lt;b&gt;Trigger de Reentrenamiento&lt;/b&gt;&lt;br&gt;Airflow / Webhook&lt;br&gt;&lt;i&gt;Activado por degradación de recall en producción&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fce4ec;strokeColor=#c62828;fontSize=10;" vertex="1" parent="1">
+      <mxGeometry x="40" y="665" width="220" height="70" as="geometry" />
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- ETAPA 5: Automatización Ingeniería de Datos -->
+    <!-- ============================================================ -->
+    <mxCell id="etapa5" value="&lt;b&gt;Etapa 5 — Automatización Ingeniería de Datos&lt;/b&gt;&lt;br&gt;Apache Airflow + dbt&lt;br&gt;Arquitectura Medallion: Bronze → Silver → Gold&lt;br&gt;&lt;i&gt;Pipeline estandarizado desde fuente centralizada&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+      <mxGeometry x="310" y="665" width="280" height="85" as="geometry" />
+    </mxCell>
+
+    <!-- Feature Store Producción -->
+    <mxCell id="feature_store_prod" value="Feature Store Producción&lt;br&gt;Feast (Redis/PostgreSQL)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=8;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="1">
+      <mxGeometry x="360" y="785" width="185" height="55" as="geometry" />
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- ETAPA 6: Generación de Artefactos -->
+    <!-- ============================================================ -->
+    <mxCell id="etapa6" value="&lt;b&gt;Etapa 6 — Generación de Artefactos&lt;/b&gt;&lt;br&gt;MLflow + scikit-learn / PyTorch&lt;br&gt;Entrenamiento con Feature Store de producción&lt;br&gt;&lt;i&gt;Artefacto versionado en Model Registry (MLflow)&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+      <mxGeometry x="650" y="665" width="270" height="85" as="geometry" />
+    </mxCell>
+
+    <!-- Model Registry -->
+    <mxCell id="model_registry" value="Model Registry&lt;br&gt;MLflow Model Registry" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=8;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="1">
+      <mxGeometry x="700" y="785" width="175" height="55" as="geometry" />
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- ETAPA 7: Tests del Modelo -->
+    <!-- ============================================================ -->
+    <mxCell id="etapa7" value="&lt;b&gt;Etapa 7 — Tests del Modelo&lt;/b&gt;&lt;br&gt;pytest + Great Expectations&lt;br&gt;&lt;i&gt;Recall mínimo por clase, robustez ante síntomas faltantes/ruidosos. Énfasis en huérfanas.&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+      <mxGeometry x="980" y="665" width="265" height="80" as="geometry" />
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- ETAPA 8: Tests de Integración -->
+    <!-- ============================================================ -->
+    <mxCell id="etapa8" value="&lt;b&gt;Etapa 8 — Tests de Integración&lt;/b&gt;&lt;br&gt;pytest + Postman / httpx&lt;br&gt;&lt;i&gt;Flujo completo batch + API REST. Casos borde, coherencia, tiempo de respuesta.&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+      <mxGeometry x="1305" y="665" width="265" height="80" as="geometry" />
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- ETAPA 9: Despliegue Canary -->
+    <!-- ============================================================ -->
+    <mxCell id="etapa9" value="&lt;b&gt;Etapa 9 — Despliegue Canary&lt;/b&gt;&lt;br&gt;Docker + FastAPI + Kubernetes / Docker Compose (local)&lt;br&gt;Canary: NGINX / Istio (cloud) o scripts locales&lt;br&gt;&lt;i&gt;Rollback automático si métricas no mejoran&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+      <mxGeometry x="1305" y="790" width="270" height="90" as="geometry" />
+    </mxCell>
+
+    <!-- Decision rollback -->
+    <mxCell id="dec_canary" value="¿Métricas canary mejoran o igualan?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;" vertex="1" parent="1">
+      <mxGeometry x="1330" y="915" width="215" height="65" as="geometry" />
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- ETAPA 10: Monitoreo -->
+    <!-- ============================================================ -->
+    <mxCell id="etapa10" value="&lt;b&gt;Etapa 10 — Monitoreo de Métricas&lt;/b&gt;&lt;br&gt;Prometheus + Grafana / MLflow&lt;br&gt;&lt;i&gt;Recall por clase en producción. Alerta si cae bajo umbral → activa Trigger.&lt;/i&gt;&lt;br&gt;Ciclo: predicción → contraste médico → validación → recall real" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+      <mxGeometry x="980" y="1010" width="285" height="90" as="geometry" />
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- API REST endpoint (producción) -->
+    <!-- ============================================================ -->
+    <mxCell id="api_prod" value="&lt;b&gt;API REST (Producción)&lt;/b&gt;&lt;br&gt;FastAPI + Docker&lt;br&gt;&lt;i&gt;Predicciones en tiempo real para médicos&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#2e7d32;fontSize=10;" vertex="1" parent="1">
+      <mxGeometry x="680" y="1010" width="220" height="70" as="geometry" />
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- FLECHAS — Flujo principal -->
+    <!-- ============================================================ -->
+
+    <!-- Frontend → Etapa 1 (API REST path, indicado) -->
+    <mxCell id="e_fe_e1" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#1565c0;strokeWidth=1.5;" edge="1" source="frontend" target="etapa1" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="lbl_fe_e1" value="REST pred." style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontSize=9;fillColor=none;strokeColor=none;" vertex="1" connectable="0" parent="e_fe_e1">
+      <mxGeometry x="-0.1" relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Batch → Etapa 1 -->
+    <mxCell id="e_batch_e1" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#1565c0;strokeWidth=1.5;" edge="1" source="batch_input" target="etapa1" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="lbl_batch_e1" value="Batch diario" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontSize=9;fillColor=none;strokeColor=none;" vertex="1" connectable="0" parent="e_batch_e1">
+      <mxGeometry x="-0.1" relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Etapa 1 → Raw DB -->
+    <mxCell id="e_e1_rawdb" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#388e3c;" edge="1" source="etapa1" target="raw_db" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Raw DB → Etapa 2 -->
+    <mxCell id="e_rawdb_e2" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#6c8ebf;" edge="1" source="raw_db" target="etapa2" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Etapa 2 → Decision datos -->
+    <mxCell id="e_e2_dec" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" source="etapa2" target="dec_data" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Decision NO → Etapa 2 (iterativo) -->
+    <mxCell id="e_dec_e2_no" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#f57f17;strokeWidth=1.5;dashed=1;" edge="1" source="dec_data" target="etapa2" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="750" y="340" />
+          <mxPoint x="640" y="340" />
+          <mxPoint x="640" y="210" />
+          <mxPoint x="755" y="210" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="lbl_dec_no1" value="No: re-evaluar aumentación" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontSize=8;fillColor=#fff9c4;strokeColor=none;" vertex="1" connectable="0" parent="e_dec_e2_no">
+      <mxGeometry x="0.2" relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Decision SÍ → Feature Store Exp -->
+    <mxCell id="e_dec_fs" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#388e3c;" edge="1" source="dec_data" target="feature_store_exp" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="lbl_dec_si1" value="Sí" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontSize=9;fillColor=none;strokeColor=none;" vertex="1" connectable="0" parent="e_dec_fs">
+      <mxGeometry x="0.1" relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Feature Store Exp → Etapa 3 -->
+    <mxCell id="e_fse_e3" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#6c8ebf;" edge="1" source="feature_store_exp" target="etapa3" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Etapa 3 → Decision métricas -->
+    <mxCell id="e_e3_dec2" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" source="etapa3" target="dec_metrics" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Decision NO → Feature Store Exp (iterativo) -->
+    <mxCell id="e_dec2_e3_no" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#f57f17;strokeWidth=1.5;dashed=1;" edge="1" source="dec_metrics" target="feature_store_exp" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="990" y="340" />
+          <mxPoint x="870" y="340" />
+          <mxPoint x="870" y="430" />
+          <mxPoint x="840" y="430" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="lbl_dec2_no" value="No: ajustar hiperparámetros / modelo" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontSize=8;fillColor=#fff9c4;strokeColor=none;" vertex="1" connectable="0" parent="e_dec2_e3_no">
+      <mxGeometry x="0.3" relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Decision SÍ → Etapa 4 -->
+    <mxCell id="e_dec2_e4" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#388e3c;" edge="1" source="dec_metrics" target="etapa4" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="1090" y="375" />
+          <mxPoint x="1090" y="500" />
+          <mxPoint x="750" y="500" />
+          <mxPoint x="750" y="520" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="lbl_dec2_si" value="Sí: modelo seleccionado" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontSize=8;fillColor=none;strokeColor=none;" vertex="1" connectable="0" parent="e_dec2_e4">
+      <mxGeometry x="0.4" relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Etapa 4 → Etapa 5 (atraviesa línea de producción) -->
+    <mxCell id="e_e4_e5" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#6c8ebf;strokeWidth=2;" edge="1" source="etapa4" target="etapa5" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="750" y="610" />
+          <mxPoint x="450" y="610" />
+          <mxPoint x="450" y="665" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="lbl_e4_e5" value="Aprobado → producción" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontSize=8;fillColor=none;strokeColor=none;" vertex="1" connectable="0" parent="e_e4_e5">
+      <mxGeometry x="0.4" relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Trigger → Etapa 5 -->
+    <mxCell id="e_trig_e5" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#c62828;strokeWidth=2;" edge="1" source="trigger" target="etapa5" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="lbl_trig_e5" value="Reentrenar desde E5" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontSize=8;fillColor=#fce4ec;strokeColor=none;" vertex="1" connectable="0" parent="e_trig_e5">
+      <mxGeometry x="0.3" relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Etapa 5 → Feature Store Prod -->
+    <mxCell id="e_e5_fsp" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#388e3c;" edge="1" source="etapa5" target="feature_store_prod" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Feature Store Prod → Etapa 6 -->
+    <mxCell id="e_fsp_e6" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#6c8ebf;" edge="1" source="feature_store_prod" target="etapa6" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Etapa 6 → Model Registry -->
+    <mxCell id="e_e6_mr" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#388e3c;" edge="1" source="etapa6" target="model_registry" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Model Registry → Etapa 7 -->
+    <mxCell id="e_mr_e7" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#6c8ebf;" edge="1" source="model_registry" target="etapa7" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="787" y="812" />
+          <mxPoint x="787" y="870" />
+          <mxPoint x="1113" y="870" />
+          <mxPoint x="1113" y="745" />
+          <mxPoint x="980" y="745" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Etapa 7 → Etapa 8 -->
+    <mxCell id="e_e7_e8" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#6c8ebf;" edge="1" source="etapa7" target="etapa8" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Etapa 8 → Etapa 9 -->
+    <mxCell id="e_e8_e9" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#6c8ebf;" edge="1" source="etapa8" target="etapa9" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Etapa 9 → Decision canary -->
+    <mxCell id="e_e9_dec3" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" source="etapa9" target="dec_canary" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Decision NO → Rollback (Etapa 9) -->
+    <mxCell id="e_dec3_rollback" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#c62828;strokeWidth=1.5;dashed=1;" edge="1" source="dec_canary" target="etapa9" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="1545" y="947" />
+          <mxPoint x="1620" y="947" />
+          <mxPoint x="1620" y="835" />
+          <mxPoint x="1575" y="835" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="lbl_rollback" value="No: rollback automático" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontSize=8;fillColor=#fce4ec;strokeColor=none;" vertex="1" connectable="0" parent="e_dec3_rollback">
+      <mxGeometry x="0.5" relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Decision SÍ → API REST Prod -->
+    <mxCell id="e_dec3_api" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#2e7d32;strokeWidth=2;" edge="1" source="dec_canary" target="api_prod" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="1437" y="980" />
+          <mxPoint x="1437" y="1045" />
+          <mxPoint x="900" y="1045" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="lbl_dec3_si" value="Sí: modelo en producción" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontSize=8;fillColor=none;strokeColor=none;" vertex="1" connectable="0" parent="e_dec3_api">
+      <mxGeometry x="0.5" relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- API REST → Etapa 10 -->
+    <mxCell id="e_api_e10" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#6c8ebf;" edge="1" source="api_prod" target="etapa10" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Etapa 10 → Trigger (si degradación) -->
+    <mxCell id="e_e10_trig" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#c62828;strokeWidth=2;dashed=1;" edge="1" source="etapa10" target="trigger" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="980" y="1055" />
+          <mxPoint x="150" y="1055" />
+          <mxPoint x="150" y="735" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="lbl_e10_trig" value="Degradación detectada" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontSize=8;fillColor=#fce4ec;strokeColor=none;" vertex="1" connectable="0" parent="e_e10_trig">
+      <mxGeometry x="0.3" relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- API REST → Frontend (respuesta predicción) -->
+    <mxCell id="e_api_fe" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#2e7d32;strokeWidth=1.5;dashed=1;" edge="1" source="api_prod" target="frontend" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="790" y="1045" />
+          <mxPoint x="30" y="1045" />
+          <mxPoint x="30" y="147" />
+          <mxPoint x="40" y="147" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="lbl_api_fe" value="Predicción al médico" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontSize=8;fillColor=#e8f5e9;strokeColor=none;" vertex="1" connectable="0" parent="e_api_fe">
+      <mxGeometry x="0.15" relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- NOTA CI/CD -->
+    <!-- ============================================================ -->
+    <mxCell id="cicd_note" value="&lt;b&gt;CI/CD:&lt;/b&gt; GitHub Actions corre tests unitarios e integración en cada PR/push. Solo pasa a producción si todos los tests son verde." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3e5f5;strokeColor=#7b1fa2;fontSize=10;" vertex="1" parent="1">
+      <mxGeometry x="600" y="590" width="450" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- NOTA LOCAL VS CLOUD -->
+    <!-- ============================================================ -->
+    <mxCell id="local_cloud_note" value="&lt;b&gt;Local:&lt;/b&gt; Docker Compose (FastAPI + PostgreSQL + MLflow + Feast)&lt;br&gt;&lt;b&gt;Cloud:&lt;/b&gt; AWS EC2/ECS + RDS + S3 + EKS (Kubernetes)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff8e1;strokeColor=#f9a825;fontSize=10;" vertex="1" parent="1">
+      <mxGeometry x="40" y="1100" width="450" height="45" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>
