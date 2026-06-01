@@ -379,6 +379,7 @@ Se monitorea el recall por clase en producción de forma continua. El ciclo de v
 | **MLflow** | Registro de métricas del modelo en producción | Cuando un registro validado llega (batch diario), se calcula el recall acumulado y se registra en MLflow como métrica de producción asociada a la versión del modelo activa. |
 | **Airflow** | Cálculo periódico del recall real | Un DAG diario compara las predicciones del día anterior con los diagnósticos confirmados disponibles y actualiza las métricas de producción. |
 | **PagerDuty / Slack Webhook** (opcional) | Alertas | Si Grafana detecta que el recall de alguna clase cae por debajo del umbral, dispara una alerta al equipo vía Slack o PagerDuty. |
+| **Evidently AI** | Data drift | Evalua snapshots de datos entrada vs los que tiene en el entrenamiento, alerta si nota cambios en la distribución de los mismos |
 
 ### Ciclo de validación
 
@@ -404,7 +405,7 @@ Si se detecta posible concept drift → revisión manual en Etapa 3
 
 El monitoreo distingue dos tipos de degradación de rendimiento:
 
-- **Degradación gradual por nuevos datos:** el recall cae progresivamente porque el modelo no ha visto suficientes ejemplos recientes. Se resuelve con el **Trigger de reentrenamiento** (Etapas 5 → 9).
+- **Degradación gradual por nuevos datos (data drift):** el recall cae progresivamente porque el modelo no ha visto suficientes ejemplos recientes o las distribuciones de los datos que reconoce Evidently AI son diferentes. Se resuelve con el **Trigger de reentrenamiento** (Etapas 5 → 9).
 - **Posible concept drift:** cuando la distribución de síntomas o la relación síntoma-enfermedad cambia de forma más brusca o persistente (por ejemplo, variantes estacionales de una enfermedad, cambios en los criterios diagnósticos, o aparición de nuevas comorbilidades). En este caso el sistema genera una alerta específica al equipo para que revisen los experimentos en la **Etapa 3** y evalúen si es necesario ajustar los modelos o las estrategias de aumentación antes de reentrenar.
 
 > **Suposición:** la detección de concept drift es actualmente heurística — se dispara cuando la degradación del recall supera un umbral más alto que el del reentrenamiento rutinario, o cuando el patrón de degradación es abrupto en lugar de gradual. Una implementación más robusta puede incorporar tests estadísticos de distribución (e.g., Population Stability Index, test de Kolmogorov-Smirnov sobre las features en producción).
@@ -481,6 +482,7 @@ Al detectar degradación del recall en producción, el Trigger reinicia el pipel
 | Alertas | Slack Webhook / PagerDuty | Producción |
 | Frontend médico | React + FastAPI client (estado actual); HTML/CSS/JS + Fetch API (prototipo base) | UX |
 | Control de versiones | Git + GitHub | Todo |
+| Data drift | Evidently AI | Monitoreo Producción |
 
 ---
 
