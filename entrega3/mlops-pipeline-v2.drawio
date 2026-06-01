@@ -40,8 +40,8 @@
                 <mxCell id="etapa4" value="&lt;b&gt;Etapa 4 — Tests Unitarios&lt;/b&gt;&lt;br&gt;pytest + GitHub Actions CI&lt;br&gt;&lt;i&gt;Preprocesamiento, aumentación, lectura Feature Store, formato salida modelo&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" parent="1" vertex="1">
                     <mxGeometry x="545" y="480" width="260" height="75" as="geometry"/>
                 </mxCell>
-                <mxCell id="prod_label" value="— — — — — — — — — — — — — — PRODUCCIÓN — — — — — — — — — — — — — —" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontStyle=1;fontSize=11;fontColor=#b71c1c;" parent="1" vertex="1">
-                    <mxGeometry x="40" y="635" width="1560" height="25" as="geometry"/>
+                <mxCell id="prod_label" value="— — — — — — — — — — — — — — PRODUCCIÓN — — — — — — — — — — — — — —" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontStyle=1;fontSize=14;fontColor=#b71c1c;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="620" width="1560" height="25" as="geometry"/>
                 </mxCell>
                 <mxCell id="trigger" value="&lt;b&gt;Trigger de Reentrenamiento&lt;/b&gt;&lt;br&gt;Airflow / Webhook&lt;br&gt;&lt;i&gt;Activado por degradación de recall en producción&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fce4ec;strokeColor=#c62828;fontSize=13;" parent="1" vertex="1">
                     <mxGeometry x="40" y="665" width="220" height="70" as="geometry"/>
@@ -190,8 +190,8 @@
                 <mxCell id="e_trig_e5" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#c62828;strokeWidth=2;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" parent="1" source="trigger" target="etapa5" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
-                            <mxPoint x="150" y="610"/>
-                            <mxPoint x="380" y="610"/>
+                            <mxPoint x="150" y="630"/>
+                            <mxPoint x="380" y="630"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
@@ -281,7 +281,7 @@
                     <mxGeometry x="0.15" relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="cicd_note" value="&lt;b&gt;CI/CD:&lt;/b&gt; GitHub Actions corre tests unitarios e integración en cada PR/push. Solo pasa a producción si todos los tests son verde." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3e5f5;strokeColor=#7b1fa2;fontSize=13;" parent="1" vertex="1">
-                    <mxGeometry x="600" y="590" width="450" height="40" as="geometry"/>
+                    <mxGeometry x="600" y="580" width="450" height="40" as="geometry"/>
                 </mxCell>
                 <mxCell id="local_cloud_note" value="&lt;b&gt;Local:&lt;/b&gt; Docker Compose (FastAPI + PostgreSQL + MLflow + Feast)&lt;br&gt;&lt;b&gt;Cloud:&lt;/b&gt; AWS EC2/ECS + RDS + S3 + EKS (Kubernetes)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff8e1;strokeColor=#f9a825;fontSize=13;" parent="1" vertex="1">
                     <mxGeometry x="30" y="1070" width="450" height="45" as="geometry"/>
